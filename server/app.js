@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-
+var cors = require('cors')
 var users = require('./routes/users');
 var articles = require('./routes/article')
 
@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 mongoose.connect('mongodb://localhost/blog-code');
-
+app.use(cors())
 
 
 app.use('/api', users);

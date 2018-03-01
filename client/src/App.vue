@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <headers/>
     <router-view/>
   </div>
 </template>
 
 <script>
+import headers from './components/Headers'
 import store from './vuex/store'
 export default {
+  components:{headers},
   name: 'App',
   store
 }
