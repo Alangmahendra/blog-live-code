@@ -3,28 +3,30 @@ const Model = require('../models/Articlemodel')
 class Article {
 
   static findAll(req, res) {
-    Model.find({}).populate('author').then(data => {
-      res.status(200).json({ message: 'all data', data: data })
-    })
-      .catch(err => {
+    Model.find({}).populate('author').exec((err,data)=>{
+      if(err){
         res.status(500).json({ message: err })
-      })
+      }else {
+        res.status(200).json({ message: 'item has been created', data: data })
+      }
+    })
   }
 
   static create(req, res) {
     let obj = {
       author : req.user._id,
       title : req.body.title,
-      categoty:req.body.categoty,
+      category:req.body.category,
       image : req.cloudStoragePublicUrl,
       content : req.body.content
     }
-    Model.create(obj).then(item => {
-      res.status(200).json({ message: 'item has been created', data: item })
-    })
-      .catch(err => {
+    Model.create(obj,function(err,data){
+      if(err){
         res.status(500).json({ message: err })
-      })
+      }else {
+        res.status(200).json({ message: 'item has been created', data: data })
+      }
+    })
   }
 
   static remove(req, res) {
@@ -39,11 +41,11 @@ class Article {
     let obj = {
       author : req.user._id,
       title : req.body.title,
-      categoty:req.body.categoty,
+      category:req.body.category,
       image : req.cloudStoragePublicUrl,
       content : req.body.content
     }
-    Model.findByIdAndUpdate(req.params.id, obj).then(item => {
+    Model.findByIdAndUpdate(req.params.id, obj,{new:true}).then(item => {
       res.status(200).json({ message: 'item has been updated', data: item })
     })
       .catch(err => {
@@ -62,6 +64,26 @@ class Article {
 
   static findMyOwn(req, res){
     Model.find({author: req.user._id})
+    .then(data => {
+      res.status(200).json({ message: 'data finded', data: data })
+    })
+    .catch(err => {
+      res.status(500).json({ message: err })
+    })
+  }
+
+  static findByAuthor(req, res){
+    Model.find({author: req.params.id})
+    .then(data => {
+      res.status(200).json({ message: 'data finded', data: data })
+    })
+    .catch(err => {
+      res.status(500).json({ message: err })
+    })
+  }
+
+  static findByCategory(req, res){
+    Model.find({category : req.body.category})
     .then(data => {
       res.status(200).json({ message: 'data finded', data: data })
     })

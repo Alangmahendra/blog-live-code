@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
   let articleSchema = new Schema({
+    author: {
+      type : Schema.Types.ObjectId,
+      ref : 'User'
+    },
     title:{
       type:String,
       required:true
@@ -14,14 +18,10 @@ const Schema = mongoose.Schema
       type:String,
       required:true
     },
-    author: {
-      type: Schema.Types.ObjectId,
-      ref:'user'
-    },
     image:String
     
   },{timestamps : {}})
 
-  let userModel = mongoose.model('Costumers',articleSchema)
+  let userModel = mongoose.model('article',articleSchema)
 
   module.exports = userModel

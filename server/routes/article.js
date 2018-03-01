@@ -10,4 +10,5 @@ const midle = require('../auth/image')
     router.delete('/:id',auth.isLogin,Article.remove)
     router.put('/:id',auth.isLogin,midle.multer.single('image'),midle.sendUploadToGCS,Article.update)
     router.get('/:id',Article.findone)
+    router.get('/author/:id',Article.findByAuthor)
 module.exports=router;

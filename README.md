@@ -14,6 +14,7 @@
 |----------------|---------|----------------------------------------------------------|
 |api/blog        |GET      |get All article blog for all user                         |
 |api/blog        |POST     |post a Blog only for authenticated user                   |
+|api/blog/mine   |GET      |get all article of yours                                  |
 |api/blog/:id    |GET      |get one artile for all user                               |
 |api/blog/:id    |PUT      |update one Article only for authenticated user            |
 |api/blog/:id    |DELETE   |delete one Article only for authenticated user            |

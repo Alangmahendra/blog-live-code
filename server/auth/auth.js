@@ -1,3 +1,7 @@
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
+require('dotenv').config()
+
 module.exports={
   isLogin : function(req,res,next){
       jwt.verify(req.headers.authorization,process.env.SECRET_KEY,function(err,decoded){
