@@ -6,8 +6,10 @@
 </template>
 
 <script>
+import store from './vuex/store'
 export default {
-  name: 'App'
+  name: 'App',
+  store
 }
 </script>
 
@@ -18,6 +20,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
