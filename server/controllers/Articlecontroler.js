@@ -13,8 +13,10 @@ class Article {
   }
 
   static create(req, res) {
+    console.log(req.user)
+    console.log(req.user._id)
     let obj = {
-      author : req.user._id,
+      author : req.user.id,
       title : req.body.title,
       category:req.body.category,
       image : req.cloudStoragePublicUrl,
@@ -39,7 +41,7 @@ class Article {
 
   static update(req, res) {
     let obj = {
-      author : req.user._id,
+      author : req.user.id,
       title : req.body.title,
       category:req.body.category,
       image : req.cloudStoragePublicUrl,
@@ -54,12 +56,13 @@ class Article {
   }
 
   static findone(req, res) {
-    Model.findById(req.params.id).populate('author').then(data => {
-      res.status(200).json({ message: 'data finded', data: data })
-    })
-      .catch(err => {
+    Model.findById(req.params.id).populate('author').exec((err,data)=>{
+      if(err){
         res.status(500).json({ message: err })
-      })
+      }else {
+        res.status(200).json({ message: 'item has been created', data: data })
+      }
+    })
   }
 
   static findMyOwn(req, res){
@@ -74,11 +77,12 @@ class Article {
 
   static findByAuthor(req, res){
     Model.find({author: req.params.id})
-    .then(data => {
-      res.status(200).json({ message: 'data finded', data: data })
-    })
-    .catch(err => {
-      res.status(500).json({ message: err })
+    .exec((err,data)=>{
+      if(err){
+        res.status(500).json({ message: err })
+      }else {
+        res.status(200).json({ message: 'item has been created', data: data })
+      }
     })
   }
 
