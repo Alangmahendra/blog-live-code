@@ -66,7 +66,7 @@ class Article {
   }
 
   static findMyOwn(req, res){
-    Model.find({author: req.user._id})
+    Model.find({author: req.user._id}).populate('author')
     .then(data => {
       res.status(200).json({ message: 'data finded', data: data })
     })

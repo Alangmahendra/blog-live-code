@@ -37,7 +37,7 @@ export default {
           console.log(response.data.token)
           localStorage.setItem('token', response.data.token)
           alert('you have loged in,now you can access profile page know')
-          this.$router.push({name: 'Blog'})
+          this.$router.push({name: 'Home'})
         })
         .catch(err => console.error(err))
     },

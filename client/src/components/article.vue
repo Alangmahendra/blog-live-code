@@ -3,7 +3,7 @@
     <b-card 
     :title="article.title">
       <b-card>
-        <img :src="article.image" alt="harusnya gambar">
+        <img :src="article.image" alt="harusnya gambar" @click="toseeArticle(article._id)">
       </b-card>
       oleh : {{article.author.username}}
     </b-card>
@@ -12,7 +12,12 @@
 
 <script>
 export default {
- props : ['article']
+ props : ['article'],
+ methods:{
+   toseeArticle(id){
+     this.$router.push({name:'Article', params:{id:id}})
+   }
+ }
 }
 </script>
 

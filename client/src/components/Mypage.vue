@@ -12,11 +12,7 @@
     <br>
     <h3>Do What Ever You Want</h3>
     <b-card-group deck>
-      <mine
-      v-for="article in myArticles"
-      :key="article._id"
-      :article="article"
-    ></mine>
+      <mine v-for="(article,index) in myArticles" :key="index" :article="article"/>
     </b-card-group>
   </div>
 </template>
@@ -52,7 +48,7 @@ export default {
     submitArticle () {
       this.addarticle(this.formData).then(() => {
         this.reset()
-        this.$router.push({name: 'Blog'})
+        this.$router.push({name: 'Home'})
       })
     },
     reset () {
